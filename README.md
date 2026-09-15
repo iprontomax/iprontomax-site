@@ -1,9 +1,18 @@
-# iProntoMAX — Site institucional
+# iProntoMAX — Site Institucional
 
-Site estático da iProntoMAX, provedor 100% fibra óptica de Caxias - MA e região.
+Landing page da iProntoMAX, provedor regional de internet 100% fibra óptica.
 
-## Visualização local
-Abra `index.html` no navegador ou rode um servidor local simples.
+## Visualização
 
-## GitHub Pages
-O repositório inclui um workflow em `.github/workflows/pages.yml` para publicar o site no GitHub Pages a cada push na branch `main`.
+O site é publicado automaticamente no GitHub Pages a cada atualização da branch `main`.
+
+## Estrutura
+
+- `index.html` — página principal
+- `styles.css` + `styles/` — estilos
+- `script.js` — interações
+- `assets/` — identidade visual e logo oficial
+
+## Desenvolvimento
+
+Este projeto está em evolução. Planos, preços, WhatsApp e demais dados comerciais ainda serão atualizados com as informações oficiais da iProntoMAX.
