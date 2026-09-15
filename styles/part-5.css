@@ -1,0 +1,5 @@
+  .lead-form { grid-template-columns:1fr; padding:20px; }
+  .lead-form button,.form-status { grid-column:1; }
+  .footer-grid { grid-template-columns:1fr; }
+  .floating-whatsapp span { display:none; }
+}
