@@ -1,0 +1,55 @@
+.plans-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
+.plan-card { position:relative; border:1px solid var(--line); border-radius:26px; padding:30px; background:white; box-shadow:0 14px 35px rgba(11,17,54,.06); display:flex; flex-direction:column; }
+.plan-card.featured { border:2px solid #d72df3; transform:translateY(-10px); box-shadow:0 22px 60px rgba(124,45,232,.16); }
+.badge { position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:linear-gradient(90deg,#7b35f3,#ff2fc9); color:white; font-size:10px; font-weight:900; padding:8px 15px; border-radius:999px; white-space:nowrap; }
+.plan-speed { font-size:38px; font-weight:900; letter-spacing:-.04em; color:#131a43; }
+.plan-speed b { color:#6b36f0; font-size:26px; }
+.plan-card p { min-height:52px; color:var(--muted); line-height:1.55; }
+.price { display:flex; align-items:flex-end; gap:6px; flex-wrap:wrap; margin:12px 0 18px; }
+.price small { width:100%; color:#8990a8; }
+.price strong { font-size:31px; }
+.price span { color:#747d98; margin-bottom:5px; }
+.plan-card ul { list-style:none; padding:0; margin:8px 0 28px; }
+.plan-card li { position:relative; padding:7px 0 7px 25px; color:#4f5872; font-size:14px; }
+.plan-card li::before { content:"✓"; position:absolute; left:0; color:#08be78; font-weight:900; }
+.plan-card .btn { margin-top:auto; }
+.plans-note { margin-top:26px; color:#8a91a6; text-align:center; font-size:12px; }
+
+.region { background:linear-gradient(135deg,#071633 0%,#11255d 52%,#3a1468 100%); color:white; overflow:hidden; }
+.region-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+.region-copy p { color:#cbd3e7; }
+.city-list { display:grid; gap:10px; margin:28px 0; }
+.city-list span { color:#eef2ff; font-weight:700; }
+.city-list span::first-letter { color:var(--green); }
+.region-map { min-height:480px; position:relative; }
+.map-shape { position:absolute; inset:35px 55px; background:linear-gradient(155deg,rgba(56,100,255,.32),rgba(216,42,240,.18)); border:1px solid rgba(110,150,255,.38); clip-path:polygon(31% 4%,54% 12%,72% 9%,89% 30%,84% 49%,96% 65%,78% 79%,61% 94%,40% 88%,28% 76%,8% 64%,16% 42%,10% 20%); box-shadow:0 0 90px rgba(92,41,231,.34); }
+.map-lines { position:absolute; inset:0; background:radial-gradient(circle at 40% 20%,rgba(64,225,255,.17),transparent 30%),radial-gradient(circle at 75% 70%,rgba(255,49,201,.18),transparent 30%); }
+.pin { position:absolute; display:flex; align-items:center; gap:8px; color:#f0f3ff; font-size:12px; }
+.pin i { width:17px; height:17px; background:#ff37ce; border-radius:50% 50% 50% 0; transform:rotate(-45deg); box-shadow:0 0 18px #ff37ce; }
+.pin b { background:rgba(7,18,48,.76); border:1px solid rgba(255,255,255,.1); padding:7px 10px; border-radius:10px; }
+.pin-1 { left:45%; top:34%; }
+.pin-2 { right:9%; top:45%; }
+.pin-3 { left:27%; top:59%; }
+.pin-4 { right:14%; bottom:16%; }
+.map-bubble { position:absolute; right:0; top:20px; width:180px; padding:17px; border-radius:18px; background:linear-gradient(140deg,#c633ef,#ff36cb); font-weight:800; font-size:13px; line-height:1.35; }
+
+.differences { background:white; }
+.diff-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.diff-card { border:1px solid var(--line); border-radius:22px; padding:25px; background:linear-gradient(180deg,#fff,#fbfbfe); }
+.diff-card span { font-size:30px; }
+.diff-card h3 { margin:18px 0 10px; font-size:18px; }
+.diff-card p { margin:0; color:var(--muted); font-size:14px; line-height:1.65; }
+
+.faq { background:var(--surface-2); }
+.faq-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; }
+.accordion { display:grid; gap:12px; }
+details { background:white; border:1px solid var(--line); border-radius:16px; padding:18px 20px; }
+summary { font-weight:800; cursor:pointer; }
+details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
+
+.cta-section { padding:90px 0; background:linear-gradient(110deg,#5326d7 0%,#7f2be4 38%,#ff35ca 100%); color:white; }
+.cta-box { display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:start; }
+.cta-box > div p { color:#f5dff7; font-size:17px; line-height:1.6; }
+.lead-form { background:white; color:var(--ink); border-radius:28px; padding:28px; display:grid; grid-template-columns:1fr 1fr; gap:14px; box-shadow:var(--shadow); }
+.lead-form label { display:grid; gap:7px; }
+.lead-form label span { font-size:12px; font-weight:800; color:#4d5670; }
