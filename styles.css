@@ -263,3 +263,28 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
   .floating-whatsapp span { display:none; }
 }
 
+
+/* Current commercial plans and COMBOMAX highlight. */
+.plans-grid { row-gap:32px; }
+.plan-card { min-width:0; }
+.plan-card ul { margin-bottom:26px; }
+.plan-card .price strong { font-size:clamp(27px,2.5vw,34px); }
+.combo-link { color:#6730d9; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
+.plan-perks { display:flex; justify-content:center; flex-wrap:wrap; gap:16px 32px; margin:-12px 0 40px; padding:20px; border:1px solid #e6dcff; border-radius:18px; background:#f3edff; color:#4e3775; text-align:center; font-size:14px; }
+.plan-perks strong { display:block; margin-bottom:5px; color:#6327c9; }
+.plan-card.combo-max { background:linear-gradient(145deg,#191b4b,#5621a0); border:2px solid #c34cff; color:white; box-shadow:0 18px 45px rgba(99,39,201,.22); scroll-margin-top:110px; }
+.combo-max .badge { font-size:10px; padding:9px 14px; }
+.combo-title { font-size:25px; line-height:1.15; letter-spacing:-.03em; margin:12px 0 18px; }
+.combo-max .plan-speed,.combo-max .plan-speed b { color:white; }
+.combo-max p,.combo-max li,.combo-max .price span { color:#e5ddfa; }
+.combo-max .price strong { color:#75ffcb; }
+.combo-max .btn { box-shadow:0 8px 25px rgba(0,224,154,.18); }
+.plans-conditions { max-width:850px; margin:30px auto 0; color:#606984; text-align:center; font-size:13px; line-height:1.65; }
+.plans-conditions p { margin:8px 0; }
+@media (min-width:681px) and (max-width:980px) {
+  .plans-grid { grid-template-columns:repeat(2,minmax(0,1fr)); max-width:none; }
+}
+@media (max-width:680px) {
+  .plan-perks { margin-top:0; }
+  .plans-grid { gap:30px; }
+}
