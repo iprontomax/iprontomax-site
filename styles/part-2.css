@@ -55,17 +55,30 @@
 
 .plans { background:linear-gradient(#fff,#f8f8fd); }
 
-/* Gentle, independent floating paths around the main hero card. */
-@media (prefers-reduced-motion: no-preference) {
-  .card-mini { animation:hero-card-float 8s ease-in-out infinite; }
-  .card-mini-1 { --float-x:12px; --float-y:-14px; --float-tilt:2deg; animation-delay:-2s; }
-  .card-mini-2 { --float-x:-10px; --float-y:-12px; --float-tilt:-2deg; animation-duration:9s; animation-delay:-5s; }
-  .card-mini-3 { --float-x:-14px; --float-y:-10px; --float-tilt:1.5deg; animation-duration:10s; animation-delay:-3s; }
-  .hero-visual:hover .card-mini { animation-play-state:paused; }
+/* Continuous elliptical orbits; independent scale keeps hover motion separate. */
+.card-mini {
+  scale:1;
+  transition:scale .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease, border-color .35s ease;
 }
-@keyframes hero-card-float {
-  0%, 100% { transform:translate3d(0,0,0) rotate(0deg); }
-  25% { transform:translate3d(var(--float-x),var(--float-y),0) rotate(var(--float-tilt)); }
-  50% { transform:translate3d(0,calc(var(--float-y) * 1.4),0) rotate(0deg); }
-  75% { transform:translate3d(calc(var(--float-x) * -1),var(--float-y),0) rotate(calc(var(--float-tilt) * -1)); }
+@media (hover:hover) {
+  .card-mini:hover {
+    animation-play-state:paused;
+    scale:1.08;
+    z-index:2;
+    border-color:rgba(156,228,255,.5);
+    box-shadow:0 24px 55px rgba(0,0,0,.3), 0 0 24px rgba(116,110,255,.18);
+  }
+}
+@media (prefers-reduced-motion:no-preference) {
+  .card-mini { animation:hero-card-orbit 16s linear infinite; }
+  .card-mini-1 { --orbit-radius:18px; animation-delay:-3s; }
+  .card-mini-2 { --orbit-radius:15px; animation-duration:19s; animation-delay:-11s; animation-direction:reverse; }
+  .card-mini-3 { --orbit-radius:20px; animation-duration:22s; animation-delay:-7s; }
+}
+@keyframes hero-card-orbit {
+  from { transform:scale(1,.65) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg) scale(1,1.5384615385); }
+  to { transform:scale(1,.65) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg) scale(1,1.5384615385); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .card-mini { transition:none; }
 }
