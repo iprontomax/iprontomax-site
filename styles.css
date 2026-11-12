@@ -410,3 +410,39 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
 @media(prefers-reduced-motion:no-preference) { .combo-max::before { animation:combo-neon-orbit 8s linear infinite; } }
 @keyframes combo-neon-orbit { to { --combo-neon-angle:360deg; } }
 @media(prefers-reduced-motion:reduce) { .plan-card.combo-max,.combo-max::after { transition:none; } }
+
+/* Consistent feedback for every call to action, including WhatsApp and the menu. */
+.btn,.floating-whatsapp,.menu-toggle {
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .24s cubic-bezier(.2,.75,.3,1),box-shadow .24s ease,background-color .24s ease,border-color .24s ease,color .24s ease,filter .24s ease;
+}
+.btn:focus-visible,.floating-whatsapp:focus-visible,.menu-toggle:focus-visible {
+  outline:3px solid #b55cff;
+  outline-offset:4px;
+}
+@media(hover:hover) and (pointer:fine) {
+  .btn:hover,.floating-whatsapp:hover { transform:translateY(-3px) scale(1.025); }
+  .btn-primary:hover,.floating-whatsapp:hover {
+    filter:brightness(1.07);
+    box-shadow:0 10px 30px rgba(0,236,145,.38),0 0 18px rgba(0,236,145,.22);
+  }
+  .btn-ghost:hover {
+    background-color:rgba(133,99,255,.22);
+    border-color:#c7adff;
+    box-shadow:0 8px 24px rgba(104,66,241,.28),0 0 15px rgba(183,126,255,.16);
+  }
+  .btn-outline:hover {
+    background-color:#f3edff;
+    color:#6127ca;
+    border-color:#9b68e9;
+    box-shadow:0 8px 24px rgba(109,54,214,.16);
+  }
+  .menu-toggle:hover { transform:scale(1.08); background-color:rgba(158,116,255,.18); border-radius:10px; }
+  .hero-cta .btn > span { transition:transform .24s ease; }
+  .hero-cta .btn:hover > span { transform:translateX(4px); }
+}
+.btn:active,.floating-whatsapp:active,.menu-toggle:active { transform:translateY(0) scale(.97); filter:brightness(.98); }
+@media(prefers-reduced-motion:reduce) {
+  .btn,.floating-whatsapp,.menu-toggle,.hero-cta .btn > span { transition:none; }
+  .btn:hover,.btn:active,.floating-whatsapp:hover,.floating-whatsapp:active,.menu-toggle:hover,.menu-toggle:active,.hero-cta .btn:hover > span { transform:none; }
+}
