@@ -325,3 +325,34 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
 @media (max-width:680px) {
   .coverage-map { min-height:0; }
 }
+
+/* Float and highlight each locality independently. Terrain lines are clipped in SVG. */
+.coverage-place {
+  transform-box:view-box;
+  scale:1;
+  pointer-events:bounding-box;
+  outline:none;
+  transition:scale .3s ease,filter .3s ease;
+}
+.coverage-place-label { transition:stroke .3s ease,stroke-opacity .3s ease,fill .3s ease; }
+.coverage-place:is(:hover,:focus-visible) {
+  animation-play-state:paused;
+  scale:1.09;
+  filter:drop-shadow(0 0 6px rgba(0,236,177,.65));
+}
+.coverage-place:is(:hover,:focus-visible) .coverage-place-label {
+  fill:#103747;
+  stroke:#00ecb1;
+  stroke-opacity:1;
+}
+.coverage-place-main:is(:hover,:focus-visible) { filter:drop-shadow(0 0 7px rgba(255,73,209,.7)); }
+.coverage-place-main:is(:hover,:focus-visible) .coverage-place-label { fill:#392048; stroke:#ff49d1; }
+.coverage-place:is(:hover,:focus-visible) .coverage-pulse { animation-play-state:paused; }
+@media (prefers-reduced-motion:no-preference) {
+  .coverage-place { animation:coverage-city-float var(--city-duration,7s) ease-in-out var(--city-delay,0s) infinite; }
+}
+@keyframes coverage-city-float {
+  0%,100% { transform:translate(0,2px); }
+  50% { transform:translate(2px,-4px); }
+}
+@media (prefers-reduced-motion:reduce) { .coverage-place,.coverage-place-label { transition:none; } }
