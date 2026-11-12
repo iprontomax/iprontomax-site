@@ -643,3 +643,32 @@ main > section[id] { scroll-margin-top:100px; }
 
 /* Show the single COMBOMAX card first on mobile, without a duplicate preview. */
 @media(max-width:680px) { .plans-grid > .combo-max { order:-1; margin-top:0; } }
+
+/* Rotate only the luminous ring, keeping the speed text stable. */
+@media(prefers-reduced-motion:no-preference) {
+  .speed-ring::before { animation:fiber-ring-spin 9s linear infinite; }
+}
+@keyframes fiber-ring-spin { from { transform:rotate(20deg); } to { transform:rotate(380deg); } }
+/* A calm, opaque text panel separates the message from the background lights. */
+.hero-visual { min-height:530px; }
+.card-mini-3 { bottom:4px; }
+.card-main { height:424px; }
+.card-main p {
+  padding:11px 12px;
+  border:1px solid rgba(170,201,255,.18);
+  border-radius:16px;
+  background:rgba(5,16,41,.86);
+  color:#f7faff;
+  font-size:19px;
+  line-height:1.45;
+  font-weight:600;
+  text-align:center;
+  text-shadow:none;
+}
+.card-main strong { color:#63ffca; font-weight:800; }
+.speed-label { color:#d4def3; font-weight:500; }
+@media(max-width:680px) {
+  .hero-visual { min-height:438px; }
+  .card-main { height:395px; }
+  .card-main p { padding:10px 9px; font-size:17px; line-height:1.45; }
+}
