@@ -295,3 +295,33 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
 .app-icon { display:inline-flex; width:32px; height:32px; flex:0 0 32px; border-radius:9px; box-shadow:0 3px 8px rgba(8,16,44,.1); }
 .app-icon svg { display:block; width:100%; height:100%; }
 .combo-max .app-icon { box-shadow:0 0 0 1px rgba(255,255,255,.16); }
+
+/* Regional coverage diagram, positioned from the supplied geographic reference. */
+.region-grid { gap:45px; grid-template-columns:1fr 1.12fr; }
+.coverage-map { min-height:0; width:100%; }
+.coverage-map-svg { display:block; width:100%; height:auto; overflow:visible; }
+.coverage-road-label rect { fill:#152b50; stroke:#849aca; stroke-opacity:.4; }
+.coverage-road-label text { fill:#becce8; }
+.coverage-place { font-family:Inter,sans-serif; font-size:14px; font-weight:700; }
+.coverage-place-label { fill:#091831; stroke:#889dd9; stroke-opacity:.3; }
+.coverage-place text { fill:#f2f7ff; }
+.coverage-dot { fill:#00ecb1; stroke:#d1fff0; stroke-width:1.5; }
+.coverage-dot-halo { fill:#00e6a5; fill-opacity:.14; stroke:#00e6a5; stroke-opacity:.4; }
+.coverage-pulse { fill:none; stroke:#00e6a5; stroke-opacity:.24; }
+.coverage-place-main .coverage-dot { fill:#ff49d1; stroke:#ffe0f8; }
+.coverage-place-main .coverage-dot-halo { fill:#ff49d1; stroke:#ff49d1; }
+.coverage-place-main .coverage-place-label { stroke:#ff49d1; stroke-opacity:.6; }
+.coverage-place-main .coverage-pulse { stroke:#ff49d1; }
+.coverage-map-note { margin:16px 12px 0; color:#b8c8e4; font-size:12px; line-height:1.65; text-align:center; }
+@media (prefers-reduced-motion:no-preference) {
+  .coverage-pulse { animation:coverage-signal 4s ease-out infinite; transform-box:fill-box; transform-origin:center; }
+  .coverage-place:nth-of-type(even) .coverage-pulse { animation-delay:-2s; }
+}
+@keyframes coverage-signal { 0% { transform:scale(.7); opacity:.75; } 80%,100% { transform:scale(1.65); opacity:0; } }
+@media (max-width:980px) {
+  .region-grid { grid-template-columns:1fr; gap:36px; }
+  .coverage-map { max-width:680px; margin:0 auto; }
+}
+@media (max-width:680px) {
+  .coverage-map { min-height:0; }
+}
