@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=feature-icons-20261112-1" />
+  <link rel="stylesheet" href="styles.css?v=header-20261112-1" />
 </head>
 <body>
   <header class="site-header">
@@ -20,17 +20,18 @@
         <img class="brand-logo" src="assets/logo-iprontomax.png" alt="Logo iProntoMAX" />
       </a>
 
-      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-navigation">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="nav" aria-label="Navegação principal">
+      <nav class="nav" id="main-navigation" aria-label="Navegação principal">
         <a href="#inicio">Início</a>
         <a href="#planos">Planos</a>
         <a href="#cobertura">Cobertura</a>
         <a href="#diferenciais">Diferenciais</a>
         <a href="#polos">Nossos polos</a>
         <a href="#faq">Ajuda</a>
+        <a class="nav-mobile-cta" href="#contato">Assine já <span aria-hidden="true">→</span></a>
       </nav>
 
       <a class="btn btn-primary btn-header" href="#contato">Assine já</a>
@@ -416,6 +417,6 @@
 
   <a class="floating-whatsapp" href="https://wa.me/5599981794200?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20iProntoMAX!" target="_blank" rel="noopener noreferrer" aria-label="Falar com a iProntoMAX">✆ <span>Falar com a iProntoMAX</span></a>
 
-  <script src="script.js?v=whatsapp-neon-20261112-1"></script>
+  <script src="script.js?v=header-20261112-1"></script>
 </body>
 </html>
