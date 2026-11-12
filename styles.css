@@ -640,3 +640,6 @@ main > section[id] { scroll-margin-top:100px; }
   .combo-overview .plan-speed { font-size:48px; }
   .plan-card .combo-purchase .price strong { font-size:36px; }
 }
+
+/* Show the single COMBOMAX card first on mobile, without a duplicate preview. */
+@media(max-width:680px) { .plans-grid > .combo-max { order:-1; margin-top:0; } }
