@@ -200,72 +200,80 @@
         </div>
 
         <div class="region-map coverage-map reveal delay-1">
-          <svg class="coverage-map-svg" viewBox="0 0 680 600" role="group" aria-labelledby="coverage-map-title coverage-map-desc">
+          <svg class="coverage-map-svg" viewBox="0 0 680 740" role="group" aria-labelledby="coverage-map-title coverage-map-desc">
             <title id="coverage-map-title">Cobertura iProntoMAX em Caxias e região</title>
-            <desc id="coverage-map-desc">Mapa ilustrativo baseado na referência: Codó a noroeste, Aldeias Altas ao norte de Caxias, São João do Sóter a sudoeste e Baú ao sul. Consulte a disponibilidade no seu endereço.</desc>
+            <desc id="coverage-map-desc">Mapa ilustrativo com posições aproximadas conforme a referência: Codó a noroeste de Caxias; Aldeias Altas ao norte; São João do Sóter a sudoeste; Baú ao sul, um pouco a oeste; e Matões mais ao sul e a leste de Baú. Consulte a disponibilidade no seu endereço.</desc>
             <defs>
               <linearGradient id="coverage-land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3255a0" stop-opacity=".32"/><stop offset="1" stop-color="#9438d6" stop-opacity=".18"/></linearGradient>
               <radialGradient id="coverage-halo"><stop stop-color="#00e6b0" stop-opacity=".18"/><stop offset="1" stop-color="#00e6b0" stop-opacity="0"/></radialGradient>
               <pattern id="coverage-grid" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M35 0H0V35" fill="none" stroke="#9db8ff" stroke-opacity=".07"/></pattern>
-              <clipPath id="coverage-boundary"><path d="M71 149 171 89 294 115 363 88 496 130 576 237 548 334 598 418 506 519 370 566 241 532 125 548 67 429 99 329 58 240Z"/></clipPath>
+              <clipPath id="coverage-boundary"><path d="M58 121 140 82 258 102 343 81 460 131 552 220 574 347 625 435 559 525 587 639 496 699 385 675 294 704 178 624 78 570 51 449 79 330 45 231Z"/></clipPath>
             </defs>
-            <rect x="1" y="1" width="678" height="598" rx="30" fill="#091b40" fill-opacity=".62" stroke="#91a7ef" stroke-opacity=".2"/>
-            <rect x="1" y="1" width="678" height="598" rx="30" fill="url(#coverage-grid)"/>
-            <path d="M71 149 171 89 294 115 363 88 496 130 576 237 548 334 598 418 506 519 370 566 241 532 125 548 67 429 99 329 58 240Z" fill="url(#coverage-land)" stroke="#829bf0" stroke-opacity=".16"/>
-            <circle cx="383" cy="350" r="230" fill="url(#coverage-halo)"/>
+            <rect x="1" y="1" width="678" height="738" rx="30" fill="#091b40" fill-opacity=".62" stroke="#91a7ef" stroke-opacity=".2"/>
+            <rect x="1" y="1" width="678" height="738" rx="30" fill="url(#coverage-grid)"/>
+            <path d="M58 121 140 82 258 102 343 81 460 131 552 220 574 347 625 435 559 525 587 639 496 699 385 675 294 704 178 624 78 570 51 449 79 330 45 231Z" fill="url(#coverage-land)" stroke="#829bf0" stroke-opacity=".16"/>
+            <circle cx="350" cy="390" r="290" fill="url(#coverage-halo)"/>
             <g class="coverage-terrain" clip-path="url(#coverage-boundary)">
-            <g class="coverage-water" fill="none" stroke="#56d9ee" stroke-opacity=".3" stroke-width="2">
-              <path d="M370 81 356 127 382 160 373 201 400 242 411 283 438 314 445 355 432 405 418 450 410 530 397 569"/>
-              <path d="m445 355-49 40-65 11-39 37-62 32-64 18-56-8"/>
-              <path d="m190 142 20-40-12-38"/>
-            </g>
-            <g fill="none" stroke="#b0baff" stroke-width="2.5" stroke-opacity=".45" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m65 177 81 21 44-56 30 63 66 52 73 31 48 45 38 22 41 38 72 24 60 16"/>
-              <path d="m166 566 92-20 74-5 78-11 78-12 89-22 42 5"/>
-            </g>
-            <g class="coverage-road-label" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
-              <rect x="293" y="265" width="54" height="22" rx="6"/><text x="320" y="280">BR-316</text>
-              <rect x="458" y="481" width="54" height="22" rx="6"/><text x="485" y="496">BR-226</text>
-            </g>
+              <g class="coverage-water" fill="none" stroke="#56d9ee" stroke-opacity=".3" stroke-width="2">
+                <path d="M375 70 363 125 340 168 345 210 365 255 390 320 376 377 357 432 345 495 337 547 320 604 310 710"/>
+                <path d="m390 320-58 24-42 42-63 12-45 28-42 14-92 15"/>
+                <path d="m100 120 12-41-21-32"/>
+              </g>
+              <g fill="none" stroke="#b0baff" stroke-width="2.5" stroke-opacity=".45" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m28 153 54 17 18-50 47 78 76 39 58 19 56 39 53 25 58 35 71 18 112 49"/>
+                <path d="m35 585 89-31 59-7 80-31 82-21 64-7 80-21 103-6"/>
+                <path d="m345 495-8 52 16 43 42 31 70 19 78-16" stroke-opacity=".55"/>
+              </g>
+              <g class="coverage-road-label" font-size="11" font-family="Inter, sans-serif" text-anchor="middle">
+                <rect x="232" y="241" width="54" height="22" rx="6"/><text x="259" y="256">BR-316</text>
+                <rect x="455" y="459" width="54" height="22" rx="6"/><text x="482" y="474">BR-226</text>
+              </g>
             </g>
             <g transform="translate(31 31)"><circle cx="5" cy="5" r="4" fill="#00e6a5"/><text x="20" y="10" fill="#9dffe0" font-family="Inter, sans-serif" font-size="12" font-weight="800" letter-spacing="1.5">NOSSA CONEXÃO CHEGA AQUI</text></g>
             <g transform="translate(620 35)" fill="#a7badc" font-family="Inter, sans-serif" text-anchor="middle"><text y="0" font-size="11">N</text><path d="m0 8-5 14 5-3 5 3z" fill="#a7badc"/></g>
-            <g class="coverage-place" aria-label="Codó" tabindex="0" style="transform-origin:190px 142px;--city-duration:6s;--city-delay:-1.3s">
-              <circle class="coverage-pulse" cx="190" cy="142" r="18"/>
-              <circle class="coverage-dot-halo" cx="190" cy="142" r="11"/>
-              <circle class="coverage-dot" cx="190" cy="142" r="5"/>
-              <rect class="coverage-place-label" x="207" y="132" width="65" height="30" rx="9"/>
-              <text x="239.5" y="147" text-anchor="middle" dominant-baseline="central">Codó</text>
+            <g class="coverage-place" aria-label="Codó" tabindex="0" style="transform-origin:100px 120px;--city-duration:6.0s;--city-delay:-1.3s">
+              <circle class="coverage-pulse" cx="100" cy="120" r="18"/>
+              <circle class="coverage-dot-halo" cx="100" cy="120" r="11"/>
+              <circle class="coverage-dot" cx="100" cy="120" r="5"/>
+              <rect class="coverage-place-label" x="118" y="108" width="70" height="32" rx="9"/>
+              <text x="153" y="124" text-anchor="middle" dominant-baseline="central">Codó</text>
             </g>
-            <g class="coverage-place" aria-label="Aldeias Altas" tabindex="0" style="transform-origin:400px 242px;--city-duration:6.6s;--city-delay:-2.6s">
-              <circle class="coverage-pulse" cx="400" cy="242" r="18"/>
-              <circle class="coverage-dot-halo" cx="400" cy="242" r="11"/>
-              <circle class="coverage-dot" cx="400" cy="242" r="5"/>
-              <rect class="coverage-place-label" x="415" y="206" width="135" height="30" rx="9"/>
-              <text x="482.5" y="221" text-anchor="middle" dominant-baseline="central">Aldeias Altas</text>
+            <g class="coverage-place" aria-label="Aldeias Altas" tabindex="0" style="transform-origin:345px 210px;--city-duration:6.6s;--city-delay:-2.6s">
+              <circle class="coverage-pulse" cx="345" cy="210" r="18"/>
+              <circle class="coverage-dot-halo" cx="345" cy="210" r="11"/>
+              <circle class="coverage-dot" cx="345" cy="210" r="5"/>
+              <rect class="coverage-place-label" x="365" y="190" width="140" height="32" rx="9"/>
+              <text x="435" y="206" text-anchor="middle" dominant-baseline="central">Aldeias Altas</text>
             </g>
-            <g class="coverage-place coverage-place-main" aria-label="Caxias" tabindex="0" style="transform-origin:445px 355px;--city-duration:7.2s;--city-delay:-3.9000000000000004s">
-              <circle class="coverage-pulse" cx="445" cy="355" r="24"/>
-              <circle class="coverage-dot-halo" cx="445" cy="355" r="14"/>
-              <circle class="coverage-dot" cx="445" cy="355" r="6"/>
-              <rect class="coverage-place-label" x="463" y="345" width="80" height="30" rx="9"/>
-              <text x="503" y="360" text-anchor="middle" dominant-baseline="central">Caxias</text>
+            <g class="coverage-place coverage-place-main" aria-label="Caxias" tabindex="0" style="transform-origin:390px 320px;--city-duration:7.2s;--city-delay:-3.9s">
+              <circle class="coverage-pulse" cx="390" cy="320" r="24"/>
+              <circle class="coverage-dot-halo" cx="390" cy="320" r="14"/>
+              <circle class="coverage-dot" cx="390" cy="320" r="6"/>
+              <rect class="coverage-place-label" x="410" y="305" width="85" height="32" rx="9"/>
+              <text x="452.5" y="321" text-anchor="middle" dominant-baseline="central">Caxias</text>
             </g>
-            <g class="coverage-place" aria-label="São João do Sóter" tabindex="0" style="transform-origin:230px 475px;--city-duration:7.8s;--city-delay:-5.2s">
-              <circle class="coverage-pulse" cx="230" cy="475" r="18"/>
-              <circle class="coverage-dot-halo" cx="230" cy="475" r="11"/>
-              <circle class="coverage-dot" cx="230" cy="475" r="5"/>
-              <rect class="coverage-place-label" x="42" y="443" width="175" height="30" rx="9"/>
-              <text x="129.5" y="458" text-anchor="middle" dominant-baseline="central">São João do Sóter</text>
+            <g class="coverage-place" aria-label="São João do Sóter" tabindex="0" style="transform-origin:140px 440px;--city-duration:7.8s;--city-delay:-5.2s">
+              <circle class="coverage-pulse" cx="140" cy="440" r="18"/>
+              <circle class="coverage-dot-halo" cx="140" cy="440" r="11"/>
+              <circle class="coverage-dot" cx="140" cy="440" r="5"/>
+              <rect class="coverage-place-label" x="36" y="465" width="190" height="32" rx="9"/>
+              <text x="131" y="481" text-anchor="middle" dominant-baseline="central">São João do Sóter</text>
             </g>
-            <g class="coverage-place" aria-label="Baú" tabindex="0" style="transform-origin:410px 530px;--city-duration:8.4s;--city-delay:-6.5s">
-              <circle class="coverage-pulse" cx="410" cy="530" r="18"/>
-              <circle class="coverage-dot-halo" cx="410" cy="530" r="11"/>
-              <circle class="coverage-dot" cx="410" cy="530" r="5"/>
-              <rect class="coverage-place-label" x="428" y="520" width="60" height="30" rx="9"/>
-              <text x="458" y="535" text-anchor="middle" dominant-baseline="central">Baú</text>
+            <g class="coverage-place" aria-label="Baú" tabindex="0" style="transform-origin:345px 495px;--city-duration:8.4s;--city-delay:-6.5s">
+              <circle class="coverage-pulse" cx="345" cy="495" r="18"/>
+              <circle class="coverage-dot-halo" cx="345" cy="495" r="11"/>
+              <circle class="coverage-dot" cx="345" cy="495" r="5"/>
+              <rect class="coverage-place-label" x="365" y="480" width="65" height="32" rx="9"/>
+              <text x="397.5" y="496" text-anchor="middle" dominant-baseline="central">Baú</text>
             </g>
-            <g transform="translate(32 569)" font-family="Inter, sans-serif" font-size="11"><circle cx="4" cy="-4" r="4" fill="#00e6a5"/><text x="17" fill="#c2cde5">Localidades atendidas</text><text x="370" fill="#8e9fbd">MARANHÃO · MAPA ILUSTRATIVO</text></g>
+            <g class="coverage-place" aria-label="Matões" tabindex="0" style="transform-origin:465px 640px;--city-duration:9.0s;--city-delay:-7.8s">
+              <circle class="coverage-pulse" cx="465" cy="640" r="18"/>
+              <circle class="coverage-dot-halo" cx="465" cy="640" r="11"/>
+              <circle class="coverage-dot" cx="465" cy="640" r="5"/>
+              <rect class="coverage-place-label" x="485" y="625" width="95" height="32" rx="9"/>
+              <text x="532.5" y="641" text-anchor="middle" dominant-baseline="central">Matões</text>
+            </g>
+            <g transform="translate(32 716)" font-family="Inter, sans-serif" font-size="11"><circle cx="4" cy="-4" r="4" fill="#00e6a5"/><text x="17" fill="#c2cde5">Localidades atendidas</text><text x="370" fill="#8e9fbd">MARANHÃO · MAPA ILUSTRATIVO</text></g>
           </svg>
           <button class="btn btn-ghost map-expand" id="expandCoverageMap" type="button" aria-haspopup="dialog" aria-controls="coverageMapDialog" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></svg>Ampliar mapa</button>
           <p class="coverage-map-note">Mapa ilustrativo das regiões atendidas. Consulte a disponibilidade no seu endereço.</p>
