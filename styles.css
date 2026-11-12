@@ -387,3 +387,26 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
   .villages-icon svg { width:32px; height:32px; }
   .villages-callout .btn { grid-column:1; justify-self:stretch; }
 }
+
+/* Animated neon frame and pointer-reactive glow for the COMBOMAX offer. */
+@property --combo-neon-angle { syntax:"<angle>"; initial-value:0deg; inherits:false; }
+.plan-card.combo-max { isolation:isolate; transition:box-shadow .35s ease,border-color .35s ease; }
+.combo-max::before {
+  content:""; position:absolute; inset:-2px; border-radius:inherit; padding:2px; pointer-events:none;
+  background:conic-gradient(from var(--combo-neon-angle),#a743ff,#ff4bda 20%,#7345ee 40%,#6effcf 55%,#a743ff 75%,#ff4bda);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+}
+.combo-max::after {
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:radial-gradient(circle 220px at var(--neon-x,50%) var(--neon-y,30%),rgba(118,255,210,.17),rgba(235,79,255,.07) 45%,transparent 75%);
+  opacity:0; transition:opacity .35s ease;
+}
+.plan-card.combo-max:is(:hover,:focus-within) { border-color:#ef77ff; box-shadow:0 0 18px rgba(182,66,255,.45),0 0 42px rgba(211,57,241,.2),0 22px 55px rgba(76,22,146,.25); }
+.combo-max:is(:hover,:focus-within)::after { opacity:1; }
+.form-status a { color:#6327c9; font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+@media(prefers-reduced-motion:no-preference) { .combo-max::before { animation:combo-neon-orbit 8s linear infinite; } }
+@keyframes combo-neon-orbit { to { --combo-neon-angle:360deg; } }
+@media(prefers-reduced-motion:reduce) { .plan-card.combo-max,.combo-max::after { transition:none; } }
