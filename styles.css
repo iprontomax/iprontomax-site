@@ -672,3 +672,6 @@ main > section[id] { scroll-margin-top:100px; }
   .card-main { height:395px; }
   .card-main p { padding:10px 9px; font-size:17px; line-height:1.45; }
 }
+
+/* Keep the hero message integrated into the glass card. */
+.card-main p { background:none; border:0; border-radius:0; text-shadow:0 2px 8px rgba(10,16,55,.35); }
