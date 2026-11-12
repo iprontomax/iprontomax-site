@@ -288,3 +288,10 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
   .plan-perks { margin-top:0; }
   .plans-grid { gap:30px; }
 }
+
+/* App pictograms remain crisp and readable on both light and COMBOMAX cards. */
+.plan-card li.plan-app { display:flex; align-items:center; gap:11px; padding:6px 0; min-height:44px; }
+.plan-card li.plan-app::before { content:none; }
+.app-icon { display:inline-flex; width:32px; height:32px; flex:0 0 32px; border-radius:9px; box-shadow:0 3px 8px rgba(8,16,44,.1); }
+.app-icon svg { display:block; width:100%; height:100%; }
+.combo-max .app-icon { box-shadow:0 0 0 1px rgba(255,255,255,.16); }
