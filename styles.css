@@ -591,3 +591,52 @@ main > section[id] { scroll-margin-top:100px; }
   .combo-purchase { gap:22px; padding:24px 18px; }
   .plan-card .combo-purchase .price strong { font-size:36px; }
 }
+
+/* COMBOMAX: a bolder premium offer, with clear speed, entertainment and price. */
+.plans-grid > .combo-max {
+  padding:44px; gap:46px; border-radius:32px;
+  background:radial-gradient(ellipse at 5% 0%,rgba(39,94,170,.4),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(176,40,232,.3),transparent 65%),linear-gradient(125deg,#0c1538,#31166a 65%,#421b80);
+  box-shadow:0 24px 65px rgba(77,24,145,.25),0 0 35px rgba(162,67,255,.12);
+}
+.combo-max .badge { top:-17px; padding:10px 22px; font-size:11px; letter-spacing:.04em; background:linear-gradient(95deg,#7030d7,#a722a7); box-shadow:0 6px 22px rgba(139,39,194,.32); }
+.combo-brand { display:flex; align-items:baseline; justify-content:center; gap:3px; margin:2px 0 16px; color:white; font-size:clamp(36px,4.2vw,60px); font-weight:900; letter-spacing:-.065em; line-height:1; }
+.combo-brand span:last-child { color:#76ffce; text-shadow:0 0 24px rgba(0,236,177,.23); }
+.combo-overview .combo-title { font-size:25px; line-height:1.2; font-weight:700; letter-spacing:-.03em; color:#f1eaff; margin:0 0 22px; }
+.combo-overview .plan-speed { display:inline-flex; align-items:baseline; gap:10px; font-size:clamp(48px,5.5vw,76px); letter-spacing:-.06em; line-height:1; text-shadow:0 6px 25px rgba(0,0,0,.15); }
+.combo-overview .plan-speed b { font-size:24px; letter-spacing:-.02em; color:#91ffde; }
+.combo-overview > p { margin:16px 0 20px; color:#cfc8e8; font-size:14px; }
+.combo-overview ul { max-width:520px; gap:10px; margin:0 auto; }
+.combo-overview ul > li:first-child { justify-self:center; padding:3px 0 3px 24px; font-size:12px; color:#a5ffe0; }
+.combo-overview li.plan-app { padding:12px 14px; border:1px solid rgba(190,163,255,.18); border-radius:15px; background:rgba(255,255,255,.045); gap:10px; font-size:13px; }
+.combo-purchase { padding:34px 26px; gap:24px; border-radius:26px; border-color:rgba(118,255,206,.27); background:radial-gradient(ellipse at 50% 0%,rgba(0,236,177,.14),transparent 65%),rgba(6,13,35,.5); box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 14px 35px rgba(0,0,0,.15); text-align:center; }
+.combo-purchase-kicker { color:#a8ffe0; font-weight:800; font-size:11px; letter-spacing:.16em; }
+.combo-purchase .price { flex-direction:column; align-items:center; gap:4px; }
+.plan-card .combo-purchase .price strong { font-size:clamp(37px,4.2vw,56px); line-height:1.1; letter-spacing:-.05em; color:#7bffd1; text-shadow:0 0 30px rgba(0,236,177,.14); white-space:nowrap; }
+.combo-purchase .price > span { margin:0; font-size:14px; }
+.combo-purchase .btn { padding:17px 16px; font-size:14px; box-shadow:0 10px 30px rgba(0,236,145,.22); }
+.combo-purchase-perks { display:grid; gap:9px; color:#d9f9eb; font-size:12px; line-height:1.4; }
+.plan-card .combo-purchase .combo-purchase-note { margin:0; min-height:0; color:#b1aacb; font-size:11px; line-height:1.65; }
+@media(min-width:681px) and (max-width:1100px) {
+  .plans-grid > .combo-max { padding:36px 26px; gap:24px; }
+  .combo-brand { font-size:42px; }
+  .combo-overview .plan-speed { font-size:56px; }
+  .combo-overview .combo-title { font-size:22px; }
+  .combo-overview li.plan-app { padding:10px 12px; }
+  .combo-purchase { padding:30px 18px; }
+}
+@media(max-width:680px) {
+  .plans-grid > .combo-max { padding:34px 22px 24px; gap:28px; }
+  .combo-max .badge { padding:10px 13px; font-size:9px; }
+  .combo-brand { font-size:43px; }
+  .combo-overview .combo-title { font-size:23px; }
+  .combo-overview .plan-speed { font-size:58px; }
+  .combo-overview .plan-speed b { font-size:21px; }
+  .combo-overview ul { grid-template-columns:1fr; gap:9px; }
+  .combo-purchase { padding:28px 18px; gap:22px; }
+  .plan-card .combo-purchase .price strong { font-size:43px; }
+}
+@media(max-width:360px) {
+  .combo-brand { font-size:36px; }
+  .combo-overview .plan-speed { font-size:48px; }
+  .plan-card .combo-purchase .price strong { font-size:36px; }
+}
