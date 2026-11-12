@@ -556,3 +556,38 @@ main > section[id] { scroll-margin-top:100px; }
 
 /* Center the speed heading in every plan card. */
 .plan-card .plan-top { width:100%; text-align:center; }
+
+/* Four comparable offers plus a full-width premium COMBOMAX row. */
+.plans-grid { grid-template-columns:repeat(4,minmax(0,1fr)); max-width:none; gap:24px; }
+.plans-grid > .plan-card:not(.combo-max) { padding:26px 22px; }
+.plans-grid > .plan-card:not(.combo-max) .plan-speed { font-size:34px; }
+.plans-grid > .plan-card:not(.combo-max) .plan-speed b { font-size:21px; }
+.plans-grid > .plan-card:not(.combo-max) p { font-size:14px; line-height:1.6; min-height:68px; }
+.plans-grid > .plan-card:not(.combo-max) .btn { padding:13px 12px; font-size:13px; }
+.plans-grid > .combo-max { grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.6fr); gap:40px; margin-top:14px; padding:38px; align-items:center; }
+.combo-overview { min-width:0; }
+.combo-overview .combo-title { margin:0 0 18px; font-size:32px; text-align:center; }
+.combo-overview > p { margin:16px 0; min-height:0; text-align:center; }
+.combo-overview ul { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 18px; max-width:500px; margin:20px auto 0; }
+.combo-overview ul > li:first-child { grid-column:1/-1; }
+.combo-purchase { display:flex; flex-direction:column; justify-content:center; gap:26px; padding:34px 26px; border:1px solid rgba(180,141,255,.25); border-radius:22px; background:rgba(12,12,53,.25); min-width:0; }
+.combo-purchase .price { justify-content:center; margin:0; gap:8px; }
+.plan-card .combo-purchase .price strong { font-size:clamp(34px,3.4vw,46px); }
+.combo-purchase .btn { width:100%; margin-top:0; text-align:center; }
+@media(min-width:681px) and (max-width:1100px) {
+  .plans-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .plans-grid > .combo-max { gap:24px; padding:32px 26px; grid-template-columns:minmax(0,1fr) minmax(230px,.75fr); }
+  .combo-overview .combo-title { font-size:27px; }
+  .combo-overview ul { grid-template-columns:1fr; }
+  .combo-purchase { padding:28px 18px; }
+}
+@media(max-width:680px) {
+  .plans-grid { grid-template-columns:1fr; gap:24px; }
+  .plans-grid > .plan-card:not(.combo-max) { padding:28px; }
+  .plans-grid > .plan-card:not(.combo-max) p { min-height:0; }
+  .plans-grid > .combo-max { grid-template-columns:1fr; padding:30px 24px; gap:24px; }
+  .combo-overview .combo-title { font-size:27px; margin-top:8px; }
+  .combo-overview ul { grid-template-columns:1fr; }
+  .combo-purchase { gap:22px; padding:24px 18px; }
+  .plan-card .combo-purchase .price strong { font-size:36px; }
+}
