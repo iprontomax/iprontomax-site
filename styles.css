@@ -356,3 +356,34 @@ details p { color:var(--muted); line-height:1.6; margin-bottom:3px; }
   50% { transform:translate(2px,-4px); }
 }
 @media (prefers-reduced-motion:reduce) { .coverage-place,.coverage-place-label { transition:none; } }
+
+/* Nearby communities get their own visible coverage invitation. */
+.villages-callout {
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:64px 1fr auto;
+  align-items:center;
+  gap:24px;
+  padding:32px;
+  border:1px solid rgba(85,255,203,.42);
+  border-radius:24px;
+  background:linear-gradient(115deg,rgba(0,230,165,.13),rgba(77,67,170,.24));
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+.villages-icon { display:grid; place-items:center; width:64px; height:64px; color:#6dffcf; background:rgba(0,230,165,.1); border:1px solid rgba(109,255,207,.25); border-radius:18px; }
+.villages-icon svg { width:38px; height:38px; }
+.villages-kicker { display:block; color:#7bffdb; font-size:11px; font-weight:900; letter-spacing:.12em; margin-bottom:10px; }
+.villages-copy h3 { margin:0 0 12px; color:white; font-size:clamp(23px,2.5vw,32px); line-height:1.15; letter-spacing:-.03em; }
+.villages-copy p { margin:0; max-width:690px; color:#d0dff1; font-size:15px; line-height:1.7; }
+.villages-copy strong { color:#adffe3; }
+.villages-callout .btn { gap:10px; text-align:center; }
+@media(max-width:980px) {
+  .villages-callout { grid-template-columns:64px 1fr; }
+  .villages-callout .btn { grid-column:2; justify-self:start; }
+}
+@media(max-width:680px) {
+  .villages-callout { grid-template-columns:1fr; gap:20px; padding:25px 22px; }
+  .villages-icon { width:52px; height:52px; border-radius:15px; }
+  .villages-icon svg { width:32px; height:32px; }
+  .villages-callout .btn { grid-column:1; justify-self:stretch; }
+}
