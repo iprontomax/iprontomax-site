@@ -655,15 +655,15 @@ main > section[id] { scroll-margin-top:100px; }
 .card-main { height:424px; }
 .card-main p {
   padding:11px 12px;
-  border:1px solid rgba(170,201,255,.18);
-  border-radius:16px;
-  background:rgba(5,16,41,.86);
+  border:0;
+  border-radius:0;
+  background:none;
   color:#f7faff;
   font-size:19px;
   line-height:1.45;
   font-weight:600;
   text-align:center;
-  text-shadow:none;
+  text-shadow:0 2px 8px rgba(10,16,55,.35);
 }
 .card-main strong { color:#63ffca; font-weight:800; }
 .speed-label { color:#d4def3; font-weight:500; }
@@ -673,5 +673,3 @@ main > section[id] { scroll-margin-top:100px; }
   .card-main p { padding:10px 9px; font-size:17px; line-height:1.45; }
 }
 
-/* Keep the hero message integrated into the glass card. */
-.card-main p { background:none; border:0; border-radius:0; text-shadow:0 2px 8px rgba(10,16,55,.35); }
