@@ -50,13 +50,17 @@ window.addEventListener('resize', () => {
 });
 updateNavigation();
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
 
 document.querySelectorAll('[data-plan]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -68,6 +72,42 @@ document.querySelectorAll('[data-plan]').forEach(btn => {
 const form = document.querySelector('#leadForm');
 const status = document.querySelector('#formStatus');
 const whatsappNumber = '5599981794200';
+const phoneInput = form?.elements.namedItem('phone');
+const validAreaCodes = new Set('11 12 13 14 15 16 17 18 19 21 22 24 27 28 31 32 33 34 35 37 38 41 42 43 44 45 46 47 48 49 51 53 54 55 61 62 63 64 65 66 67 68 69 71 73 74 75 77 79 81 82 83 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99'.split(' '));
+function phoneDigits(value) {
+  let digits = String(value).replace(/\D/g, '');
+  if ((digits.length === 12 || digits.length === 13) && digits.startsWith('55')) digits = digits.slice(2);
+  return digits;
+}
+function formatPhone(value) {
+  const digits = phoneDigits(value);
+  if (digits.length > 11) return value;
+  if (digits.length < 3) return digits ? '(' + digits : '';
+  const area = '(' + digits.slice(0, 2) + ') ';
+  const local = digits.slice(2);
+  const split = local.length > 8 ? 5 : 4;
+  return area + local.slice(0, split) + (local.length > split ? '-' + local.slice(split) : '');
+}
+function validatePhone() {
+  if (!phoneInput) return false;
+  const digits = phoneDigits(phoneInput.value);
+  const local = digits.slice(2);
+  const valid = validAreaCodes.has(digits.slice(0, 2)) &&
+    (/^9[0-9]{8}$/.test(local) || /^[2-5][0-9]{7}$/.test(local));
+  phoneInput.setCustomValidity(valid ? '' : 'Informe um WhatsApp válido com DDD. Exemplo: (99) 98179-4200.');
+  return valid;
+}
+phoneInput?.addEventListener('input', () => {
+  phoneInput.setCustomValidity('');
+  phoneInput.value = formatPhone(phoneInput.value);
+});
+phoneInput?.addEventListener('change', () => {
+  phoneInput.value = formatPhone(phoneInput.value);
+});
+phoneInput?.addEventListener('blur', () => {
+  if (phoneInput.value.trim()) validatePhone();
+});
+if (phoneInput?.value) phoneInput.value = formatPhone(phoneInput.value);
 form?.addEventListener('submit', event => {
   event.preventDefault();
   const data = new FormData(form);
@@ -78,6 +118,8 @@ form?.addEventListener('submit', event => {
     input.setCustomValidity(values[key] ? '' : 'Preencha este campo para consultar a cobertura.');
     if (!input.reportValidity()) return;
   }
+  if (!validatePhone()) { phoneInput.reportValidity(); return; }
+  values.phone = formatPhone(values.phone);
   const message = [
     'Olá, equipe iProntoMAX! Quero consultar a cobertura e saber mais sobre a contratação.',
     '',
@@ -116,3 +158,50 @@ document.querySelectorAll('.combo-max').forEach(card => {
 });
 
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+
+// An enlarged, keyboard-accessible map; the inline map remains usable without it.
+const mapDialog = document.querySelector('#coverageMapDialog');
+const mapViewport = document.querySelector('#mapViewport');
+const mapExpand = document.querySelector('#expandCoverageMap');
+const mapZoom = document.querySelector('#mapZoom');
+const mapZoomValue = document.querySelector('#mapZoomValue');
+const inlineMap = document.querySelector('.coverage-map > .coverage-map-svg');
+if (mapDialog && typeof mapDialog.showModal === 'function' && mapViewport && inlineMap) {
+  function updateMapZoom() {
+    const baseWidth = Math.max(850, mapViewport.clientWidth);
+    mapViewport.style.setProperty('--map-zoom-width', baseWidth * Number(mapZoom.value) / 100 + 'px');
+    mapZoomValue.value = mapZoom.value + '%';
+  }
+  mapExpand.addEventListener('click', () => {
+    const mapCopy = inlineMap.cloneNode(true);
+    const ids = new Map();
+    mapCopy.querySelectorAll('[id]').forEach(el => ids.set(el.id, 'enlarged-' + el.id));
+    mapCopy.querySelectorAll('*').forEach(el => {
+      for (const attr of [...el.attributes]) {
+        let value = attr.value;
+        if (attr.name === 'id') value = ids.get(value) || value;
+        else {
+          ids.forEach((newId, oldId) => { value = value.replaceAll('url(#' + oldId + ')', 'url(#' + newId + ')'); });
+          if (attr.name === 'aria-labelledby' || attr.name === 'aria-describedby') value = value.split(' ').map(id => ids.get(id) || id).join(' ');
+        }
+        el.setAttribute(attr.name, value);
+      }
+    });
+    mapCopy.setAttribute('aria-labelledby', inlineMap.getAttribute('aria-labelledby').split(' ').map(id => ids.get(id) || id).join(' '));
+    mapViewport.replaceChildren(mapCopy);
+    mapZoom.value = '100';
+    mapDialog.showModal();
+    updateMapZoom();
+    mapViewport.scrollLeft = (mapViewport.scrollWidth - mapViewport.clientWidth) / 2;
+    mapViewport.scrollTop = 65;
+  });
+  mapZoom.addEventListener('input', updateMapZoom);
+  mapDialog.addEventListener('click', event => {
+    if (event.target !== mapDialog) return;
+    const rect = mapDialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) mapDialog.close();
+  });
+  mapDialog.addEventListener('close', () => mapExpand.focus());
+  mapExpand.hidden = false;
+}
