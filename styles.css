@@ -553,3 +553,6 @@ main > section[id] { scroll-margin-top:100px; }
   .map-dialog-heading h2 { font-size:21px; }
   .map-dialog-viewport { max-height:calc(100dvh - 290px); }
 }
+
+/* Center the speed heading in every plan card. */
+.plan-card .plan-top { width:100%; text-align:center; }
