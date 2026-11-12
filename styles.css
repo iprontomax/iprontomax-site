@@ -673,3 +673,14 @@ main > section[id] { scroll-margin-top:100px; }
   .card-main p { padding:10px 9px; font-size:17px; line-height:1.45; }
 }
 
+
+/* Clear hierarchy between regional centers and the nearby villages. */
+.coverage-place { font-size:16px; }
+.coverage-place.coverage-hamlet { font-size:12.5px; font-weight:600; }
+.coverage-hamlet .coverage-dot { fill:#73dfff; stroke:#dbf8ff; stroke-width:1; }
+.coverage-hamlet .coverage-dot-halo { fill:#73dfff; stroke:#73dfff; fill-opacity:.12; stroke-opacity:.35; }
+.coverage-hamlet .coverage-pulse { stroke:#73dfff; }
+.coverage-hamlet .coverage-place-label { fill:#0b203b; stroke:#76c8e1; stroke-opacity:.25; }
+.coverage-hamlet text { fill:#d7f0ff; }
+.coverage-hamlet:is(:hover,:focus-visible) { filter:drop-shadow(0 0 5px rgba(115,223,255,.6)); }
+.coverage-hamlet:is(:hover,:focus-visible) .coverage-place-label { fill:#153c51; stroke:#73dfff; stroke-opacity:1; }
