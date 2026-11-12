@@ -54,3 +54,18 @@
 .section-heading p,.region-copy p,.faq-copy p { color:var(--muted); font-size:17px; line-height:1.7; }
 
 .plans { background:linear-gradient(#fff,#f8f8fd); }
+
+/* Gentle, independent floating paths around the main hero card. */
+@media (prefers-reduced-motion: no-preference) {
+  .card-mini { animation:hero-card-float 8s ease-in-out infinite; }
+  .card-mini-1 { --float-x:12px; --float-y:-14px; --float-tilt:2deg; animation-delay:-2s; }
+  .card-mini-2 { --float-x:-10px; --float-y:-12px; --float-tilt:-2deg; animation-duration:9s; animation-delay:-5s; }
+  .card-mini-3 { --float-x:-14px; --float-y:-10px; --float-tilt:1.5deg; animation-duration:10s; animation-delay:-3s; }
+  .hero-visual:hover .card-mini { animation-play-state:paused; }
+}
+@keyframes hero-card-float {
+  0%, 100% { transform:translate3d(0,0,0) rotate(0deg); }
+  25% { transform:translate3d(var(--float-x),var(--float-y),0) rotate(var(--float-tilt)); }
+  50% { transform:translate3d(0,calc(var(--float-y) * 1.4),0) rotate(0deg); }
+  75% { transform:translate3d(calc(var(--float-x) * -1),var(--float-y),0) rotate(calc(var(--float-tilt) * -1)); }
+}
