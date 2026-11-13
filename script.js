@@ -188,7 +188,10 @@ if (mapDialog && typeof mapDialog.showModal === 'function' && mapViewport && inl
         el.setAttribute(attr.name, value);
       }
     });
-    mapCopy.setAttribute('aria-labelledby', inlineMap.getAttribute('aria-labelledby').split(' ').map(id => ids.get(id) || id).join(' '));
+    const mapLabelIds = inlineMap.getAttribute('aria-labelledby');
+    if (mapLabelIds) mapCopy.setAttribute('aria-labelledby', mapLabelIds.split(' ').map(id => ids.get(id) || id).join(' '));
+    const mapDescriptionIds = inlineMap.getAttribute('aria-describedby');
+    if (mapDescriptionIds) mapCopy.setAttribute('aria-describedby', mapDescriptionIds.split(' ').map(id => ids.get(id) || id).join(' '));
     mapViewport.replaceChildren(mapCopy);
     mapZoom.value = '100';
     mapDialog.showModal();
