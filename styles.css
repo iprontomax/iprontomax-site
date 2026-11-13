@@ -712,3 +712,7 @@ main > section[id] { scroll-margin-top:100px; }
 .region-villages-list li { padding:9px; border:1px solid rgba(145,178,231,.15); border-radius:10px; background:rgba(122,153,223,.07); font-size:12px; line-height:1.4; overflow-wrap:anywhere; }
 .region-villages-popover .region-villages-note { color:#adc2dd; font-size:11px; }
 .region-villages-popover .btn { width:100%; padding:12px 10px; font-size:12px; }
+
+/* Uniform, compact village tiles with vertically centered names. */
+.region-villages-list { grid-auto-rows:1fr; gap:7px; }
+.region-villages-list li { display:flex; align-items:center; min-height:46px; padding:7px 9px; line-height:1.3; }
