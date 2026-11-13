@@ -685,33 +685,30 @@ main > section[id] { scroll-margin-top:100px; }
 .coverage-hamlet:is(:hover,:focus-visible) { filter:drop-shadow(0 0 5px rgba(115,223,255,.6)); }
 .coverage-hamlet:is(:hover,:focus-visible) .coverage-place-label { fill:#153c51; stroke:#73dfff; stroke-opacity:1; }
 
-/* Regional village lists open above a softly blurred map, including the enlarged map. */
+
+/* Compact, nonmodal region popover; move freely from the city into its list. */
 .coverage-place[data-region] { cursor:pointer; }
-.coverage-map.showing-villages > .coverage-map-svg,
-.map-dialog.showing-villages .map-dialog-viewport { filter:blur(5px); }
-.region-villages-dialog {
-  width:min(460px,calc(100vw - 28px)); max-width:none; max-height:calc(100dvh - 32px);
-  overflow:auto; padding:28px; color:#f2f7ff; background:linear-gradient(145deg,#102549,#161b42);
-  border:1px solid rgba(111,255,218,.35); border-radius:26px; box-shadow:0 25px 80px rgba(0,0,0,.4);
+.coverage-place.is-village-open { animation-play-state:paused; }
+.coverage-place.is-village-open .coverage-pulse { animation-play-state:paused; }
+.coverage-place.is-village-open .coverage-place-label { stroke:#70ffda; stroke-opacity:.9; fill:#103747; }
+.coverage-place-main.is-village-open .coverage-place-label { stroke:#ff49d1; fill:#392048; }
+.region-villages-popover {
+  position:fixed; inset:auto; margin:0; z-index:100; box-sizing:border-box;
+  width:310px; max-width:calc(100vw - 24px); max-height:calc(100dvh - 24px);
+  overflow:auto; padding:20px; color:#f2f7ff; background:linear-gradient(145deg,#102549,#161b42);
+  border:1px solid rgba(111,255,218,.4); border-radius:20px; box-shadow:0 18px 50px rgba(0,0,0,.35);
 }
-.region-villages-dialog::backdrop { background:rgba(3,10,29,.45); }
-.region-villages-top { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; }
-.region-villages-tag { color:#85ffdb; font-size:11px; font-weight:900; letter-spacing:.14em; }
-.region-villages-dialog form { margin:0; }
-.region-villages-close { display:grid; place-items:center; width:38px; height:38px; border:1px solid rgba(255,255,255,.2); border-radius:12px; background:rgba(255,255,255,.06); color:white; font-size:26px; cursor:pointer; }
+.region-villages-popover[hidden] { display:none; }
+.region-villages-popover::backdrop { background:transparent; pointer-events:none; }
+.region-villages-popover-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+.region-villages-tag { color:#85ffdb; font-size:9px; font-weight:900; letter-spacing:.12em; }
+.region-villages-popover h2 { margin:7px 0 0; font-size:22px; letter-spacing:-.03em; line-height:1.2; }
+.region-villages-close { display:grid; place-items:center; flex:0 0 30px; width:30px; height:30px; border:1px solid rgba(255,255,255,.2); border-radius:9px; background:rgba(255,255,255,.05); color:white; font-size:22px; cursor:pointer; }
 .region-villages-close:hover { background:rgba(0,236,177,.16); border-color:#75ffdb; }
-.region-villages-dialog h2 { margin:0 0 12px; font-size:28px; letter-spacing:-.035em; line-height:1.15; }
-.region-villages-dialog > p { margin:12px 0 18px; font-size:14px; line-height:1.65; color:#c4d3ea; }
-.region-villages-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; list-style:none; padding:0; margin:18px 0; }
+.region-villages-close:focus-visible { outline:2px solid #85ffdb; outline-offset:3px; }
+.region-villages-popover > p { margin:12px 0; color:#c4d3ea; font-size:12px; line-height:1.5; }
+.region-villages-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; list-style:none; padding:0; margin:12px 0; }
 .region-villages-list:empty { display:none; }
-.region-villages-list li { padding:12px; border:1px solid rgba(145,178,231,.17); border-radius:12px; background:rgba(122,153,223,.07); color:#effbf7; font-size:13px; line-height:1.4; overflow-wrap:anywhere; }
-.region-villages-dialog .region-villages-note { font-size:12px; color:#adc2dd; }
-.region-villages-dialog .btn { width:100%; padding:14px 12px; font-size:13px; text-align:center; }
-.region-villages-back { display:block; margin:18px auto 0; padding:8px 12px; border:0; border-radius:10px; background:none; color:#b4ffe5; cursor:pointer; font-size:13px; font-weight:700; }
-.region-villages-back:hover { background:rgba(0,236,177,.08); }
-.region-villages-close:focus-visible,.region-villages-back:focus-visible { outline:2px solid #85ffdb; outline-offset:3px; }
-@media(max-width:380px) {
-  .region-villages-dialog { padding:22px; }
-  .region-villages-dialog h2 { font-size:25px; }
-  .region-villages-list { grid-template-columns:1fr; }
-}
+.region-villages-list li { padding:9px; border:1px solid rgba(145,178,231,.15); border-radius:10px; background:rgba(122,153,223,.07); font-size:12px; line-height:1.4; overflow-wrap:anywhere; }
+.region-villages-popover .region-villages-note { color:#adc2dd; font-size:11px; }
+.region-villages-popover .btn { width:100%; padding:12px 10px; font-size:12px; }
