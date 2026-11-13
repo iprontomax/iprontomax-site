@@ -302,8 +302,11 @@ if (villagesPopover) {
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       villagesPopover.getAnimations().forEach(animation => animation.cancel());
       villagesPopover.animate(
-        [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration: 220, easing: 'cubic-bezier(.2,.75,.3,1)' }
+        [
+          { opacity: 0, transform: 'translateY(14px) scale(.97)' },
+          { opacity: 1, transform: 'translateY(0) scale(1)' }
+        ],
+        { duration: 440, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'both' }
       );
     }
   }
