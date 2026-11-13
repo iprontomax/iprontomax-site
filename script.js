@@ -207,7 +207,7 @@ if (mapDialog && typeof mapDialog.showModal === 'function' && mapViewport && inl
 }
 
 
-// One shared village dialog handles both the inline map and its enlarged copy.
+// One compact village popover works on both versions of the map.
 const regionVillages = {
   'sao-joao': { name: 'São João do Sóter', villages: ['Pedras', 'Piquizeiro', 'Carnaúba', 'Bom Jardim Rio', 'Bom Jardim Centro', 'Candeias'] },
   caxias: { name: 'Caxias', villages: ['Junco', 'Chapada', 'Sambaíba', 'São José dos Mesquitas', 'Saquinho', 'Palestina'] },
@@ -216,54 +216,144 @@ const regionVillages = {
   codo: { name: 'Codó', villages: [] },
   aldeias: { name: 'Aldeias Altas', villages: [] }
 };
-const villagesDialog = document.querySelector('#regionVillagesDialog');
+
+const villagesPopover = document.querySelector('#regionVillagesPopover');
 let villagesTrigger = null;
-if (villagesDialog && typeof villagesDialog.showModal === 'function') {
+let villageHideTimer = 0;
+let villageOpen = false;
+let villageInput = 'pointer';
+let suppressVillageFocus = false;
+if (villagesPopover) {
+  const nativePopover = typeof villagesPopover.showPopover === 'function';
+  const hoverPointer = window.matchMedia('(hover:hover) and (pointer:fine)');
   document.querySelectorAll('.coverage-place[data-region]').forEach(marker => {
     marker.setAttribute('role', 'button');
     marker.setAttribute('aria-haspopup', 'dialog');
-    marker.setAttribute('aria-controls', 'regionVillagesDialog');
+    marker.setAttribute('aria-controls', 'regionVillagesPopover');
+    marker.setAttribute('aria-expanded', 'false');
     marker.setAttribute('aria-label', marker.getAttribute('aria-label') + ': ver povoados e cobertura');
   });
-  function openRegionVillages(marker) {
+  function cancelVillageHide() { clearTimeout(villageHideTimer); }
+  function hideRegionVillages(returnFocus = false) {
+    cancelVillageHide();
+    if (!villageOpen) return;
+    const previous = villagesTrigger;
+    villageOpen = false;
+    previous?.classList.remove('is-village-open');
+    previous?.setAttribute('aria-expanded', 'false');
+    if (nativePopover && villagesPopover.matches(':popover-open')) villagesPopover.hidePopover();
+    villagesPopover.hidden = true;
+    if (returnFocus && previous?.isConnected) {
+      suppressVillageFocus = true;
+      previous.focus({ preventScroll: true });
+      suppressVillageFocus = false;
+    }
+    villagesTrigger = null;
+  }
+  function scheduleVillageHide() {
+    cancelVillageHide();
+    villageHideTimer = setTimeout(() => {
+      if (villageInput === 'keyboard' && (villagesPopover.contains(document.activeElement) || villagesTrigger?.contains(document.activeElement))) return;
+      hideRegionVillages();
+    }, 180);
+  }
+  function positionVillagePopover(marker) {
+    const anchor = (marker.querySelector('.coverage-place-label') || marker).getBoundingClientRect();
+    const bounds = villagesPopover.getBoundingClientRect();
+    const margin = 12, gap = 10;
+    let left = anchor.right + gap;
+    if (left + bounds.width > innerWidth - margin) left = anchor.left - gap - bounds.width;
+    left = Math.max(margin, Math.min(left, innerWidth - bounds.width - margin));
+    let top = anchor.top + (anchor.height - bounds.height) / 2;
+    top = Math.max(margin, Math.min(top, innerHeight - bounds.height - margin));
+    villagesPopover.style.left = left + 'px';
+    villagesPopover.style.top = top + 'px';
+  }
+  function openRegionVillages(marker, input = 'pointer') {
     const region = regionVillages[marker.dataset.region];
-    if (!region || villagesDialog.open) return;
+    if (!region) return;
+    cancelVillageHide();
+    villageInput = input;
+    if (villageOpen && villagesTrigger === marker) return;
+    hideRegionVillages();
+    // Place it inside the enlarged dialog when that map is open; no modal backdrop is added.
+    const host = marker.closest('#coverageMapDialog') || document.body;
+    host.append(villagesPopover);
     villagesTrigger = marker;
+    marker.classList.add('is-village-open');
+    marker.setAttribute('aria-expanded', 'true');
     document.querySelector('#regionVillagesTitle').textContent = region.name;
     document.querySelector('#regionVillagesIntro').textContent = region.villages.length
-      ? 'Alguns dos principais povoados atendidos nesta região:'
-      : 'Atendemos também povoados próximos desta região. Informe sua localidade à nossa equipe para consultar a cobertura.';
-    const list = document.querySelector('#regionVillagesList');
-    list.replaceChildren(...region.villages.map(name => {
+      ? 'Principais povoados atendidos:'
+      : 'Informe sua localidade à nossa equipe para consultar os povoados atendidos nesta região.';
+    document.querySelector('#regionVillagesList').replaceChildren(...region.villages.map(name => {
       const item = document.createElement('li');
       item.textContent = name;
       return item;
     }));
     document.querySelector('#regionVillagesContact').href = 'https://wa.me/' + whatsappNumber + '?text=' +
       encodeURIComponent('Olá, equipe iProntoMAX! Quero consultar a cobertura em um povoado na região de ' + region.name + '. Minha localidade é: ');
-    document.querySelector('.coverage-map')?.classList.add('showing-villages');
-    mapDialog?.classList.add('showing-villages');
-    villagesDialog.showModal();
+    villagesPopover.style.visibility = 'hidden';
+    villagesPopover.hidden = false;
+    if (nativePopover) villagesPopover.showPopover();
+    villageOpen = true;
+    positionVillagePopover(marker);
+    villagesPopover.style.visibility = 'visible';
   }
+  document.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch' || !hoverPointer.matches) return;
+    const marker = event.target.closest?.('.coverage-place[data-region]');
+    if (marker && !marker.contains(event.relatedTarget)) openRegionVillages(marker);
+  });
+  document.addEventListener('pointerout', event => {
+    if (event.pointerType === 'touch' || !hoverPointer.matches) return;
+    const marker = event.target.closest?.('.coverage-place[data-region]');
+    if (marker && !marker.contains(event.relatedTarget) && !villagesPopover.contains(event.relatedTarget)) scheduleVillageHide();
+  });
+  villagesPopover.addEventListener('pointerenter', event => {
+    if (event.pointerType !== 'touch') villageInput = 'pointer';
+    cancelVillageHide();
+  });
+  villagesPopover.addEventListener('pointerleave', event => {
+    if (!villagesTrigger?.contains(event.relatedTarget)) scheduleVillageHide();
+  });
+  document.addEventListener('pointerdown', () => { villageInput = 'pointer'; }, true);
   document.addEventListener('click', event => {
     const marker = event.target.closest?.('.coverage-place[data-region]');
-    if (marker) openRegionVillages(marker);
+    if (marker) {
+      if (!hoverPointer.matches && villageOpen && villagesTrigger === marker) hideRegionVillages();
+      else openRegionVillages(marker);
+    } else if (villageOpen && !villagesPopover.contains(event.target)) hideRegionVillages();
   });
   document.addEventListener('keydown', event => {
+    if (event.key === 'Tab') villageInput = 'keyboard';
+    if (event.key === 'Escape' && villageOpen) {
+      event.preventDefault();
+      hideRegionVillages(true);
+      return;
+    }
     const marker = event.target.closest?.('.coverage-place[data-region]');
     if (marker && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
-      openRegionVillages(marker);
+      openRegionVillages(marker, 'keyboard');
     }
   });
-  villagesDialog.addEventListener('click', event => {
-    if (event.target !== villagesDialog) return;
-    const rect = villagesDialog.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) villagesDialog.close();
+  document.addEventListener('focusin', event => {
+    if (suppressVillageFocus) return;
+    const marker = event.target.closest?.('.coverage-place[data-region]');
+    if (marker && villageInput === 'keyboard') openRegionVillages(marker, 'keyboard');
+    if (villagesPopover.contains(event.target)) cancelVillageHide();
   });
-  villagesDialog.addEventListener('close', () => {
-    document.querySelector('.coverage-map')?.classList.remove('showing-villages');
-    mapDialog?.classList.remove('showing-villages');
-    if (villagesTrigger?.isConnected) villagesTrigger.focus({ preventScroll: true });
+  document.addEventListener('focusout', event => {
+    if (villagesPopover.contains(event.target) || villagesTrigger?.contains(event.target)) scheduleVillageHide();
   });
+  document.querySelector('#closeRegionVillages').addEventListener('click', () => hideRegionVillages(true));
+  window.addEventListener('resize', () => hideRegionVillages());
+  document.addEventListener('scroll', event => {
+    if (villageOpen && !villagesPopover.contains(event.target)) {
+      if (villageInput === 'keyboard' && (villagesTrigger?.contains(document.activeElement) || villagesPopover.contains(document.activeElement))) positionVillagePopover(villagesTrigger);
+      else hideRegionVillages();
+    }
+  }, true);
+  mapDialog?.addEventListener('close', () => hideRegionVillages());
 }
