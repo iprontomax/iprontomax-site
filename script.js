@@ -205,3 +205,65 @@ if (mapDialog && typeof mapDialog.showModal === 'function' && mapViewport && inl
   mapDialog.addEventListener('close', () => mapExpand.focus());
   mapExpand.hidden = false;
 }
+
+
+// One shared village dialog handles both the inline map and its enlarged copy.
+const regionVillages = {
+  'sao-joao': { name: 'São João do Sóter', villages: ['Pedras', 'Piquizeiro', 'Carnaúba', 'Bom Jardim Rio', 'Bom Jardim Centro', 'Candeias'] },
+  caxias: { name: 'Caxias', villages: ['Junco', 'Chapada', 'Sambaíba', 'São José dos Mesquitas', 'Saquinho', 'Palestina'] },
+  bau: { name: 'Baú e Matões', villages: ['Lagoa Grande', 'Podreza', 'Povoado Km97', 'Onça', 'Buriti Frio', 'Quilombo'] },
+  matoes: { name: 'Baú e Matões', villages: ['Lagoa Grande', 'Podreza', 'Povoado Km97', 'Onça', 'Buriti Frio', 'Quilombo'] },
+  codo: { name: 'Codó', villages: [] },
+  aldeias: { name: 'Aldeias Altas', villages: [] }
+};
+const villagesDialog = document.querySelector('#regionVillagesDialog');
+let villagesTrigger = null;
+if (villagesDialog && typeof villagesDialog.showModal === 'function') {
+  document.querySelectorAll('.coverage-place[data-region]').forEach(marker => {
+    marker.setAttribute('role', 'button');
+    marker.setAttribute('aria-haspopup', 'dialog');
+    marker.setAttribute('aria-controls', 'regionVillagesDialog');
+    marker.setAttribute('aria-label', marker.getAttribute('aria-label') + ': ver povoados e cobertura');
+  });
+  function openRegionVillages(marker) {
+    const region = regionVillages[marker.dataset.region];
+    if (!region || villagesDialog.open) return;
+    villagesTrigger = marker;
+    document.querySelector('#regionVillagesTitle').textContent = region.name;
+    document.querySelector('#regionVillagesIntro').textContent = region.villages.length
+      ? 'Alguns dos principais povoados atendidos nesta região:'
+      : 'Atendemos também povoados próximos desta região. Informe sua localidade à nossa equipe para consultar a cobertura.';
+    const list = document.querySelector('#regionVillagesList');
+    list.replaceChildren(...region.villages.map(name => {
+      const item = document.createElement('li');
+      item.textContent = name;
+      return item;
+    }));
+    document.querySelector('#regionVillagesContact').href = 'https://wa.me/' + whatsappNumber + '?text=' +
+      encodeURIComponent('Olá, equipe iProntoMAX! Quero consultar a cobertura em um povoado na região de ' + region.name + '. Minha localidade é: ');
+    document.querySelector('.coverage-map')?.classList.add('showing-villages');
+    mapDialog?.classList.add('showing-villages');
+    villagesDialog.showModal();
+  }
+  document.addEventListener('click', event => {
+    const marker = event.target.closest?.('.coverage-place[data-region]');
+    if (marker) openRegionVillages(marker);
+  });
+  document.addEventListener('keydown', event => {
+    const marker = event.target.closest?.('.coverage-place[data-region]');
+    if (marker && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      openRegionVillages(marker);
+    }
+  });
+  villagesDialog.addEventListener('click', event => {
+    if (event.target !== villagesDialog) return;
+    const rect = villagesDialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) villagesDialog.close();
+  });
+  villagesDialog.addEventListener('close', () => {
+    document.querySelector('.coverage-map')?.classList.remove('showing-villages');
+    mapDialog?.classList.remove('showing-villages');
+    if (villagesTrigger?.isConnected) villagesTrigger.focus({ preventScroll: true });
+  });
+}
