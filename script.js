@@ -299,6 +299,13 @@ if (villagesPopover) {
     villageOpen = true;
     positionVillagePopover(marker);
     villagesPopover.style.visibility = 'visible';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      villagesPopover.getAnimations().forEach(animation => animation.cancel());
+      villagesPopover.animate(
+        [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 220, easing: 'cubic-bezier(.2,.75,.3,1)' }
+      );
+    }
   }
   document.addEventListener('pointerover', event => {
     if (event.pointerType === 'touch' || !hoverPointer.matches) return;
